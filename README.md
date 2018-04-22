@@ -19,33 +19,13 @@ Remember, it is recommended to use virtualenv/venv for better isolation.
 Example of script launch on Linux, Python 3.5
 ```bash
 python3 check_sites_health.py urls.txt
-for domain *stepik.org*  :  check status: OK! 
-response status code : 200 
-days before expiration : 128 
-
-for domain *www.coursera.org*  :  check status: OK! 
-response status code : 200 
-days before expiration : 1725 
-
-for domain *geekbrains.ru*  :  check status: OK! 
-response status code : 200 
-days before expiration : 156 
-
-for domain *htmlacademy.ru*  :  check status: OK! 
-response status code : 200 
-days before expiration : 280 
-
-for domain *devman.org*  :  check status: OK! 
-response status code : 200 
-days before expiration : 127 
-
-for domain *ru.wikipedia.org*  :  check status: OK! 
-response status code : 200 
-days before expiration : 1726 
-
-for domain *github.com*  :  check status: OK! 
-response status code : 200 
-days before expiration : 900 
+for domain *stepik.org*  :  check status: OK!
+for domain *www.coursera.org*  :  check status: OK!
+for domain *geekbrains.ru*  :  check status: OK!
+for domain *htmlacademy.ru*  :  check status: OK!
+for domain *devman.org*  :  check status: OK!
+for domain *ru.wikipedia.org*  :  check status: OK!
+for domain *github.com*  :  check status: OK!
 ```
 
 # Project Goals
