@@ -55,12 +55,7 @@ if __name__ == '__main__':
         condition_status = is_server_respond_ok(url)
         condition_expiration = is_expiration_date_ok(days_before_expiration)
         if condition_status and condition_expiration:
-            print(
-                'for domain *{}*  :  check status: OK! \n'
-                'response status code : {} \n'
-                'days before expiration : {} \n'.format(
-                    domain, status_code, days_before_expiration
-                ))
+            print('for domain *{}*  :  check status: OK!'.format(domain))
         else:
             print(
                 'for domain *{}*  :  check status: FAILED! \n'
