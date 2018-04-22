@@ -1,0 +1,2 @@
+python-whois==0.6.9
+requests==2.18.4
