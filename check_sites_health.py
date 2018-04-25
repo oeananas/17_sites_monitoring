@@ -13,7 +13,10 @@ def load_urls4check(filepath):
 
 
 def is_server_respond_ok(url):
-    return requests.get(url).ok
+    try:
+        return requests.get(url).ok
+    except requests.exceptions.RequestException:
+        print('error for get a response from server')
 
 
 def get_domain_name(url):
@@ -60,10 +63,7 @@ if __name__ == '__main__':
         exit('incorrect path to file')
     urls_for_check_list = load_urls4check(filepath)
     for url in urls_for_check_list:
-        try:
-            condition_status = is_server_respond_ok(url)
-        except requests.exceptions.RequestException:
-            print('error for get a response from server')
+        condition_status = is_server_respond_ok(url)
         domain = get_domain_name(url)
         exp_date = get_domain_expiration_date(domain)
         days_before_exp = get_days_before_expiration(exp_date)
