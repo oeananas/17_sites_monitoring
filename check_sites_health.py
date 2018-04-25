@@ -12,13 +12,8 @@ def load_urls4check(filepath):
     return urls_lst
 
 
-def get_server_response(url):
-    response = requests.get(url)
-    return response
-
-
-def is_server_respond_ok(response):
-    return response.ok
+def is_server_respond_ok(url):
+    return requests.get(url).ok
 
 
 def get_domain_name(url):
@@ -46,9 +41,9 @@ def is_expiration_date_ok(days_before_expiration, days_limit=30):
     return days_before_expiration > days_limit
 
 
-def print_check_message(check_value, domain, status_code, days_before_exp):
+def print_check_message(check_value, domain, days_before_exp):
     print('for domain "{}"  :  check status: {}'.format(domain, check_value))
-    print('response status code : {}'.format(status_code))
+    print('server response : {}'.format(check_value))
     print('days before expiration : {}'.format(days_before_exp))
 
 
@@ -61,16 +56,17 @@ if __name__ == '__main__':
         exit('incorrect path to file')
     urls_for_check_list = load_urls4check(filepath)
     for url in urls_for_check_list:
-        response = get_server_response(url)
-        status_code = response.status_code
+        try:
+            condition_status = is_server_respond_ok(url)
+        except requests.exceptions.RequestException:
+            print('error for get a response from server')
         domain = get_domain_name(url)
         exp_date = get_domain_expiration_date(domain)
         days_before_exp = get_days_before_expiration(exp_date)
-        condition_status = is_server_respond_ok(response)
         condition_expiration = is_expiration_date_ok(days_before_exp)
         if condition_status and condition_expiration:
             check_value = 'OK!'
         else:
             check_value = 'FAILED!'
-        print_check_message(check_value, domain, status_code, days_before_exp)
+        print_check_message(check_value, domain, days_before_exp)
         print(separator)
