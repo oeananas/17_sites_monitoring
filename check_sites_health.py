@@ -41,7 +41,11 @@ def is_expiration_date_ok(days_before_expiration, days_limit=30):
     return days_before_expiration > days_limit
 
 
-def print_check_message(check_value, domain, days_before_exp):
+def print_check_message(condition_stat, condition_exp, domain, days_before_exp):
+    if condition_stat and condition_exp:
+        check_value = 'OK!'
+    else:
+        check_value = 'FAILED!'
     print('for domain "{}"  :  check status: {}'.format(domain, check_value))
     print('server response : {}'.format(check_value))
     print('days before expiration : {}'.format(days_before_exp))
@@ -64,9 +68,10 @@ if __name__ == '__main__':
         exp_date = get_domain_expiration_date(domain)
         days_before_exp = get_days_before_expiration(exp_date)
         condition_expiration = is_expiration_date_ok(days_before_exp)
-        if condition_status and condition_expiration:
-            check_value = 'OK!'
-        else:
-            check_value = 'FAILED!'
-        print_check_message(check_value, domain, days_before_exp)
+        print_check_message(
+            condition_status,
+            condition_expiration,
+            domain,
+            days_before_exp
+        )
         print(separator)
