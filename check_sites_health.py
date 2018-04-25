@@ -12,10 +12,13 @@ def load_urls4check(filepath):
     return urls_lst
 
 
-def is_server_respond_ok(url):
+def get_server_response(url):
     response = requests.get(url)
-    if response.ok:
-        return True
+    return response
+
+
+def is_server_respond_ok(response):
+    return response.ok
 
 
 def get_domain_name(url):
@@ -33,14 +36,24 @@ def get_domain_expiration_date(domain_name):
 
 
 def get_days_before_expiration(exp_date):
-    return (exp_date - datetime.datetime.today()).days
+    if exp_date:
+        return (exp_date - datetime.datetime.today()).days
+    else:
+        return 0
 
 
 def is_expiration_date_ok(days_before_expiration, days_limit=30):
     return days_before_expiration > days_limit
 
 
+def print_check_message(check_value, domain, status_code, days_before_exp):
+    print('for domain "{}"  :  check status: {}'.format(domain, check_value))
+    print('response status code : {}'.format(status_code))
+    print('days before expiration : {}'.format(days_before_exp))
+
+
 if __name__ == '__main__':
+    separator = '*' * 30
     if len(sys.argv) == 1:
         exit('need path to file as parameter')
     filepath = sys.argv[1]
@@ -48,19 +61,16 @@ if __name__ == '__main__':
         exit('incorrect path to file')
     urls_for_check_list = load_urls4check(filepath)
     for url in urls_for_check_list:
+        response = get_server_response(url)
+        status_code = response.status_code
         domain = get_domain_name(url)
         exp_date = get_domain_expiration_date(domain)
-        status_code = requests.get(url).status_code
-        days_before_expiration = get_days_before_expiration(exp_date)
-        condition_status = is_server_respond_ok(url)
-        condition_expiration = is_expiration_date_ok(days_before_expiration)
+        days_before_exp = get_days_before_expiration(exp_date)
+        condition_status = is_server_respond_ok(response)
+        condition_expiration = is_expiration_date_ok(days_before_exp)
         if condition_status and condition_expiration:
-            print('for domain "{}"  :  check status: OK!'.format(domain))
-            print('response status code : {}'.format(status_code))
-            print('days before expiration : {}'.format(days_before_expiration))
+            check_value = 'OK!'
         else:
-            print('for domain "{}"  :  check status: FAILED!'.format(domain))
-            print('response status code : {}'.format(status_code))
-            print('days before expiration : {}'.format(days_before_expiration))
-        separator = '*' * 30
+            check_value = 'FAILED!'
+        print_check_message(check_value, domain, status_code, days_before_exp)
         print(separator)
