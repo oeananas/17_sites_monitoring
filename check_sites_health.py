@@ -56,13 +56,9 @@ def print_check_message(
 ):
     if is_server_respond and is_exp_date_correct:
         general_check_status = 'SUCCESS!'
-        server_response_status = 'OK'
-    elif is_server_respond and not is_exp_date_correct:
-        general_check_status = 'FAILED!'
-        server_response_status = 'OK'
     else:
         general_check_status = 'FAILED!'
-        server_response_status = 'NO RESPONSE'
+    server_response_status = 'OK' if is_server_respond else 'NO RESPONSE'
     print('for domain "{}"  :  check status: {}'.format(
         domain,
         general_check_status
