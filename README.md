@@ -19,33 +19,50 @@ Remember, it is recommended to use virtualenv/venv for better isolation.
 Example of script launch on Linux, Python 3.5
 ```bash
 python3 check_sites_health.py urls.txt
-for domain "stepik.org"  :  check status: OK!
-response status code : 200
-days before expiration : 126
-******************************
-for domain "www.coursera.org"  :  check status: OK!
-response status code : 200
-days before expiration : 1722
-******************************
-for domain "geekbrains.ru"  :  check status: OK!
-response status code : 200
-days before expiration : 154
-******************************
-for domain "htmlacademy.ru"  :  check status: OK!
-response status code : 200
-days before expiration : 277
-******************************
-for domain "devman.org"  :  check status: OK!
-response status code : 200
+for domain "stepik.org"  :  check status: SUCCESS!
+server response : OK
 days before expiration : 124
 ******************************
-for domain "ru.wikipedia.org"  :  check status: OK!
-response status code : 200
-days before expiration : 1723
+for domain "www.coursera.org"  :  check status: SUCCESS!
+server response : OK
+days before expiration : 1720
 ******************************
-for domain "github.com"  :  check status: OK!
-response status code : 200
-days before expiration : 898
+for domain "geekbrains.ru"  :  check status: SUCCESS!
+server response : OK
+days before expiration : 152
+******************************
+for domain "htmlacademy.ru"  :  check status: SUCCESS!
+server response : OK
+days before expiration : 275
+******************************
+for domain "devman.org"  :  check status: SUCCESS!
+server response : OK
+days before expiration : 122
+******************************
+for domain "ru.wikipedia.org"  :  check status: SUCCESS!
+server response : OK
+days before expiration : 1721
+******************************
+for domain "github.com"  :  check status: SUCCESS!
+server response : OK
+days before expiration : 896
+******************************
+for domain "market.yandex.ru"  :  check status: SUCCESS!
+server response : OK
+days before expiration : 156
+******************************
+for domain "www.citilink.ru"  :  check status: SUCCESS!
+server response : OK
+days before expiration : 156
+******************************
+for domain "www.bookvoed.ru"  :  check status: SUCCESS!
+server response : OK
+days before expiration : 353
+******************************
+error for get a response from server
+for domain ""  :  check status: FAILED!
+server response : NO RESPONSE
+days before expiration : 0
 ******************************
 
 ```
