@@ -68,8 +68,8 @@ if __name__ == '__main__':
         urls_for_check_list = load_urls4check(filepath)
     except(FileNotFoundError, UnicodeDecodeError):
         exit('incorrect path to file / not a text file')
-    for url in urls_for_check_list:
-        try:
+    try:
+        for url in urls_for_check_list:
             condition_status = is_server_respond_ok(url)
             domain = get_domain_name(url)
             exp_date = get_domain_expiration_date(domain)
@@ -81,6 +81,6 @@ if __name__ == '__main__':
                 domain,
                 days_before_exp
             )
-        except requests.exceptions.RequestException:
-            print('error for get a response from server')
-        print(separator)
+    except requests.exceptions.RequestException:
+        print('error for get a response from server')
+    print(separator)
